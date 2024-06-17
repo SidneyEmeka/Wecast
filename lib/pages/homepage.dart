@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../utilities/utility.dart';
 import '../widgets/forecast_cards.dart';
@@ -24,7 +25,7 @@ class _HomeState extends State<Home> {
 
   Future<Map<String, dynamic>> getWeather() async {
     try {
-      String cityName = "Nigeria";
+      String cityName = "Vienna";
       var response = await http.get(
         Uri.parse(
             "http://api.openweathermap.org/data/2.5/forecast?q=$cityName&APPID=$key"),
@@ -128,7 +129,7 @@ class _HomeState extends State<Home> {
                         verticalSpace(15),
                         Icon(
                           currentSky == "Clouds" || currentSky == "Rain"
-                              ? Icons.cloudy_snowing
+                              ? Icons.cloud
                               : Icons.sunny,
                           size: 40,
                         ),
@@ -155,16 +156,26 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 verticalSpace(15),
-                const SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      ForecastCards(),
-                      ForecastCards(),
-                      ForecastCards(),
-                      ForecastCards(),
-                      ForecastCards(),
-                    ],
+                SizedBox(height: 120,
+                  child: ListView.builder(
+                    itemCount: 9,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        final foreCast = data["list"][index + 1];
+                        
+                        final time = DateTime.parse(foreCast["dt_txt"]);
+                        return ForecastCards(
+                                      text: Text(DateFormat.j().format(time)),
+                                      value: Text(
+                                          foreCast["main"]["temp"].toString()),
+                                      icon: foreCast["weather"][0]["main"] ==
+                                                  "Clouds" ||
+                                          foreCast["weather"][0]["main"] ==
+                                                  "Rain"
+                                          ? const Icon(Icons.cloud)
+                                          : const Icon(Icons.sunny),
+                                    );
+                      }
                   ),
                 ),
                 verticalSpace(30),

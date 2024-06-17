@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ForecastCards extends StatelessWidget {
-  const ForecastCards({super.key});
+  final Icon icon;
+  final Widget text;
+  final Widget value;
+  const ForecastCards({super.key, required this.icon, required this.text, required this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -17,25 +20,11 @@ class ForecastCards extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
           child: Column(
             children: [
-              const Text(
-                "03:00",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
-              ),
+              text,
               verticalSpace(10),
-              const Icon(
-                Icons.cloud,
-                size: 32,
-              ),
+              icon,
               verticalSpace(10),
-              const Text(
-                "301.2 F",
-                style: TextStyle(
-                  fontSize: 10,
-                ),
-              ),
+              value,
             ],
           ),
         ),
