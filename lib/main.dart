@@ -5,7 +5,6 @@ void main() {
   runApp(const Wecast());
 }
 
-
 class Wecast extends StatelessWidget {
   const Wecast({super.key});
 
@@ -15,7 +14,9 @@ class Wecast extends StatelessWidget {
       title: "Wecast",
       theme: ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 76, 0, 51),),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color.fromARGB(255, 76, 0, 51),
+        ),
       ),
       debugShowCheckedModeBanner: false,
       home: const Home(),

@@ -1,13 +1,9 @@
-import 'dart:convert';
-
-import 'package:http/http.dart' as http;
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
-import '../utilities/utility.dart';
+import '../functions/functions.dart';
 import '../widgets/forecast_cards.dart';
 import '../widgets/info_cards.dart';
+import '../widgets/spacing.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -17,7 +13,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  String cityName = "France";
+  final TextEditingController citySearchController = TextEditingController();
 
   @override
   void initState() {
@@ -25,47 +21,20 @@ class _HomeState extends State<Home> {
     getWeather();
   }
 
-  Future<Map<String, dynamic>> getWeather() async {
-    try {
-      var response = await http.get(
-        Uri.parse(
-            "http://api.openweathermap.org/data/2.5/forecast?q=$cityName&APPID=$key"),
-      );
-
-      final data = jsonDecode(response.body);
-
-      if (data["cod"] != "200") {
-        throw "Unable to fetch data";
-      }
-
-      return data;
-    } catch (e) {
-      throw e.toString();
-    }
-  }
-
-  final TextEditingController citySearchController = TextEditingController();
-  var border = const OutlineInputBorder(
-    borderSide: BorderSide(
-      color: Colors.black38,
-      width: 2.0,
-      style: BorderStyle.none,
-    ),
-    borderRadius: BorderRadius.all(
-      Radius.circular(10),
-    ),
-  );
-
   @override
   Widget build(BuildContext context) {
     //Reusables
     double w = MediaQuery.of(context).size.width;
-
-    Widget verticalSpace(double value) {
-      return SizedBox(
-        height: value,
-      );
-    }
+    var border = const OutlineInputBorder(
+      borderSide: BorderSide(
+        color: Colors.black38,
+        width: 2.0,
+        style: BorderStyle.none,
+      ),
+      borderRadius: BorderRadius.all(
+        Radius.circular(10),
+      ),
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -151,9 +120,13 @@ class _HomeState extends State<Home> {
           final currentWetData = data["list"][0];
           final currentTemp = currentWetData["main"]["temp"];
           final currentSky = currentWetData["weather"][0]["main"];
+          final currentDescription =
+              currentWetData["weather"][0]["description"];
           final pressure = currentWetData["main"]["pressure"];
           final windSpeed = currentWetData["wind"]["speed"];
           final humidity = currentWetData["main"]["humidity"];
+          final wIcon = Uri.parse(
+              "https://openweathermap.org/img/w/${currentWetData["weather"][0]["icon"]}");
 
           return Padding(
             padding: const EdgeInsets.all(16.0),
@@ -170,35 +143,42 @@ class _HomeState extends State<Home> {
                       elevation: 10,
                       child: Column(
                         children: [
-                          verticalSpace(25),
+                          const Verticalspace(value: 25),
                           Text(cityName.toUpperCase()),
                           Text(
-                            "$currentTemp K",
+                            "${convertTemp(currentTemp)}°C",
                             style: const TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          verticalSpace(15),
-                          Icon(
-                            currentSky == "Clouds" || currentSky == "Rain"
-                                ? Icons.cloud
-                                : Icons.sunny,
-                            size: 40,
+                          const Verticalspace(value: 5),
+                          Image.network(
+                            "$wIcon.png",
+                            width: 70,
+                            height: 60,
+                            fit: BoxFit.cover,
                           ),
-                          verticalSpace(15),
+                          // Icon(
+                          //   currentSky == "Clouds" || currentSky == "Rain"
+                          //       ? Icons.cloud
+                          //       : Icons.sunny,
+                          //   size: 40,
+                          // ),
+                          const Verticalspace(value: 5),
                           Text(
-                            "$currentSky",
+                            textAlign: TextAlign.center,
+                            "$currentSky - $currentDescription",
                             style: const TextStyle(
                               fontSize: 16,
                             ),
                           ),
-                          verticalSpace(25),
+                          const Verticalspace(value: 25),
                         ],
                       ),
                     ),
                   ),
-                  verticalSpace(20),
+                  const Verticalspace(value: 20),
 
                   //forecast cards
                   const Text(
@@ -208,7 +188,7 @@ class _HomeState extends State<Home> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  verticalSpace(10),
+                  const Verticalspace(value: 10),
                   SizedBox(
                     height: 120,
                     child: ListView.builder(
@@ -216,19 +196,28 @@ class _HomeState extends State<Home> {
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           final foreCast = data["list"][index + 1];
-
                           final time = DateTime.parse(foreCast["dt_txt"]);
+                          final forecastVal = foreCast["main"]["temp"];
+                          final fIcon = Uri.parse(
+                              "https://openweathermap.org/img/w/${foreCast["weather"][0]["icon"]}");
+
                           return ForecastCards(
                             text: Text(DateFormat.j().format(time)),
-                            value: Text(foreCast["main"]["temp"].toString()),
-                            icon: foreCast["weather"][0]["main"] == "Clouds" ||
-                                    foreCast["weather"][0]["main"] == "Rain"
-                                ? const Icon(Icons.cloud)
-                                : const Icon(Icons.sunny),
+                            value: Text("${convertTemp(forecastVal)} °C"),
+                            icon: Image.network(
+                              "$fIcon.png",
+                              width: 40,
+                              height: 30,
+                              fit: BoxFit.cover,
+                            ),
+                            // icon: foreCast["weather"][0]["main"] == "Clouds" ||
+                            //         foreCast["weather"][0]["main"] == "Rain"
+                            //     ? const Icon(Icons.cloud)
+                            //     : const Icon(Icons.sunny),
                           );
                         }),
                   ),
-                  verticalSpace(30),
+                  const Verticalspace(value: 10),
 
                   //additional infos
                   const Text(
@@ -238,7 +227,7 @@ class _HomeState extends State<Home> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  verticalSpace(10),
+                  const Verticalspace(value: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
