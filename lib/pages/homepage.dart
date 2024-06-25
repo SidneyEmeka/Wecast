@@ -47,7 +47,7 @@ class _HomeState extends State<Home> {
           Container(
             padding: EdgeInsets.only(right: 15),
             child: GestureDetector(
-              onTap: (){
+              onTap: () {
                 setState(() {
                   theWeather = getWeather("Nigeria");
                 });
@@ -187,10 +187,10 @@ class _HomeState extends State<Home> {
                         children: [
                           const Verticalspace(value: 25),
                           Text(
-                              "${data["city"]["name"].toString().toUpperCase()} - ${data["city"]["country"]}",
-                          style: TextStyle(
-                          color: Color.fromARGB(255, 76, 0, 51)
-                          ),),
+                            "${data["city"]["name"].toString().toUpperCase()} - ${data["city"]["country"]}",
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 76, 0, 51)),
+                          ),
                           Text(
                             "${convertTemp(currentTemp)}°C",
                             style: const TextStyle(
@@ -227,10 +227,9 @@ class _HomeState extends State<Home> {
                   const Text(
                     "Forecasts",
                     style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                        color: Color.fromARGB(255, 76, 0, 51)
-                    ),
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        color: Color.fromARGB(255, 76, 0, 51)),
                   ),
                   const Verticalspace(value: 5),
 
@@ -326,12 +325,16 @@ class _HomeState extends State<Home> {
                           ),
                           text: const Text(
                             "Humidity",
-                            style: TextStyle(fontSize: 10, fontWeight: FontWeight.w500,
+                            style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w500,
                                 color: Color.fromARGB(255, 76, 0, 51)),
                           ),
                           value: Text(
                             humidity.toString(),
-                            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500,
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
                                 color: Color.fromARGB(255, 76, 0, 51)),
                           ),
                         ),
@@ -344,12 +347,16 @@ class _HomeState extends State<Home> {
                           text: const Text(
                             "Wind Speed",
                             textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 10, fontWeight: FontWeight.w500,
+                            style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w500,
                                 color: Color.fromARGB(255, 76, 0, 51)),
                           ),
                           value: Text(
                             windSpeed.toString(),
-                            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500,
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
                                 color: Color.fromARGB(255, 76, 0, 51)),
                           ),
                         ),
@@ -361,7 +368,9 @@ class _HomeState extends State<Home> {
                               color: Color.fromARGB(255, 76, 0, 51)),
                           text: const Text(
                             "Pressure",
-                            style: TextStyle(fontSize: 10,fontWeight: FontWeight.w500,
+                            style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.w500,
                                 color: Color.fromARGB(255, 76, 0, 51)),
                           ),
                           value: Text(

@@ -24,14 +24,14 @@ class ForecastCards extends StatelessWidget {
                 color: Color.fromARGB(255, 76, 0, 51),
                 fontWeight: FontWeight.w500
             ),),
+            const Verticalspace(value: 8),
             Text(temp, style: TextStyle(
               fontSize: 10,
               color: Color.fromARGB(255, 76, 0, 51),
               fontWeight: FontWeight.w500
             ),),
-            const Verticalspace(value: 2),
             iconImage,
-            const Verticalspace(value: 2),
+            const Verticalspace(value: 10),
             Text(describe, style: TextStyle(
                 fontSize: 10,
                 color: Color.fromARGB(255, 76, 0, 51),

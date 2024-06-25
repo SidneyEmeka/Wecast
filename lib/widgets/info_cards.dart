@@ -24,9 +24,9 @@ class InfoCards extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               icon,
-              verticalSpace(2),
+              verticalSpace(10),
               text,
-              verticalSpace(5),
+              verticalSpace(10),
               value,
             ],
           ),
