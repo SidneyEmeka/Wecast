@@ -163,7 +163,7 @@ class _HomeState extends State<Home> {
                                   theWeather = getWeather(
                                       citySearchController.text.isEmpty
                                           ? "Nigeria"
-                                          : citySearchController.text);
+                                          : citySearchController.text.trim());
                                 });
                               },
                               icon: Icon(
