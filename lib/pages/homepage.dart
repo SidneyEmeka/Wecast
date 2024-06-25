@@ -13,12 +13,13 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  late Future<Map<String, dynamic>> theWeather;
   final TextEditingController citySearchController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    getWeather();
+    theWeather = getWeather("Nigeria");
   }
 
   @override
@@ -40,67 +41,65 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 76, 0, 51),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        leading: const Icon(
-          Icons.cloudy_snowing,
-          color: Colors.white,
-          size: 15,
-        ),
+        // leading: const Icon(
+        //   Icons.cloudy_snowing,
+        //   color: Colors.white,
+        //   size: 15,
+        // ),
         title: const Text(
           "WECAST",
           style: TextStyle(
-            fontWeight: FontWeight.w700,
-            fontSize: 15,
+            fontWeight: FontWeight.w500,
+            fontSize: 12,
             color: Colors.white,
           ),
         ),
-        actions: [
-          Container(
-            width: 150,
-            height: 30,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.transparent,
-              border: Border.all(
-                color: Colors.white,
-              ),
-            ),
-            margin: const EdgeInsets.symmetric(
-              horizontal: 10,
-            ),
-            // padding: const EdgeInsets.all(10),
-            child: TextField(
-              controller: citySearchController,
-              style: const TextStyle(
-                color: Color.fromARGB(255, 76, 0, 51),
-              ),
-              decoration: InputDecoration(
-                hintStyle: const TextStyle(
-                  color: Color.fromARGB(255, 76, 0, 51),
-                  fontSize: 10,
-                ),
-                hintText: "Search City",
-                focusedBorder: border,
-                enabledBorder: border,
-                filled: true,
-                fillColor: Colors.white,
-              ),
-              keyboardType: TextInputType.text,
-            ),
-          ),
-          IconButton(
-            onPressed: () {
-              setState(() {
-                cityName = citySearchController.text;
-              });
-            },
-            icon: const Icon(Icons.send),
-            color: Colors.white,
-            iconSize: 20,
-          ),
-        ],
+        // centerTitle:true,
+        // actions: [
+        //   Container(
+        //     width: 150,
+        //     height: 30,
+        //     decoration: BoxDecoration(
+        //       borderRadius: BorderRadius.circular(10),
+        //       color: Colors.transparent,
+        //       border: Border.all(
+        //         color: Colors.white,
+        //       ),
+        //     ),
+        //     child: TextField(
+        //       cursorColor: Colors.white,
+        //       controller: citySearchController,
+        //       style: const TextStyle(
+        //         color: Color.fromARGB(255, 76, 0, 51),
+        //       ),
+        //       decoration: InputDecoration(
+        //         hintStyle: const TextStyle(
+        //           color: Color.fromARGB(255, 76, 0, 51),
+        //           fontSize: 10,
+        //         ),
+        //         hintText: "Search City",
+        //         focusedBorder: border,
+        //         enabledBorder: border,
+        //         filled: true,
+        //         fillColor: Colors.white,
+        //       ),
+        //       keyboardType: TextInputType.text,
+        //     ),
+        //   ),
+        //   IconButton(
+        //     onPressed: () {
+        //       setState(() {
+        //         cityName = citySearchController.text;
+        //       });
+        //     },
+        //     icon: const Icon(Icons.cloud_sync),
+        //     color: Colors.white,
+        //     iconSize: 20,
+        //   ),
+        // ],
       ),
       body: FutureBuilder(
-        future: getWeather(),
+        future: theWeather,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator.adaptive());
@@ -128,11 +127,44 @@ class _HomeState extends State<Home> {
           final wIcon = Uri.parse(
               "https://openweathermap.org/img/w/${currentWetData["weather"][0]["icon"]}");
 
+          String ftime(int index) {
+            final time = DateTime.parse(data["list"][index]["dt_txt"]);
+            return DateFormat.j().format(time);
+          }
+
+          double fval(int index) {
+            return data["list"][index]["main"]["temp"];
+          }
+
+          String ficon(int index) {
+            final fIcon =
+                "https://openweathermap.org/img/w/${data["list"][index]["weather"][0]["icon"]}.png";
+            return fIcon;
+          }
+
           return Padding(
             padding: const EdgeInsets.all(16.0),
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  TextField(
+                    enableSuggestions: true,
+                    keyboardType: TextInputType.text,
+                    textCapitalization: TextCapitalization.characters,
+                    controller: citySearchController,
+                    decoration: InputDecoration(
+                        hintText: "City",
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              //cityName = citySearchController.text;
+                              theWeather =
+                                  getWeather(citySearchController.text);
+                            });
+                          },
+                          icon: Icon(Icons.send_rounded),
+                        )),
+                  ),
                   //main card
                   Container(
                     margin: const EdgeInsets.symmetric(
@@ -144,7 +176,9 @@ class _HomeState extends State<Home> {
                       child: Column(
                         children: [
                           const Verticalspace(value: 25),
-                          Text(cityName.toUpperCase()),
+                          Text(citySearchController.text == ""
+                              ? "NIGERIA"
+                              : citySearchController.text.toUpperCase()),
                           Text(
                             "${convertTemp(currentTemp)}°C",
                             style: const TextStyle(
@@ -159,18 +193,13 @@ class _HomeState extends State<Home> {
                             height: 60,
                             fit: BoxFit.cover,
                           ),
-                          // Icon(
-                          //   currentSky == "Clouds" || currentSky == "Rain"
-                          //       ? Icons.cloud
-                          //       : Icons.sunny,
-                          //   size: 40,
-                          // ),
                           const Verticalspace(value: 5),
                           Text(
                             textAlign: TextAlign.center,
                             "$currentSky - $currentDescription",
                             style: const TextStyle(
-                              fontSize: 16,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                           const Verticalspace(value: 25),
@@ -178,55 +207,112 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                   ),
-                  const Verticalspace(value: 20),
+                  const Verticalspace(value: 10),
 
                   //forecast cards
                   const Text(
                     "Forecasts",
                     style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
-                  const Verticalspace(value: 10),
-                  SizedBox(
-                    height: 120,
-                    child: ListView.builder(
-                        itemCount: 9,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          final foreCast = data["list"][index + 1];
-                          final time = DateTime.parse(foreCast["dt_txt"]);
-                          final forecastVal = foreCast["main"]["temp"];
-                          final fIcon = Uri.parse(
-                              "https://openweathermap.org/img/w/${foreCast["weather"][0]["icon"]}");
+                  const Verticalspace(value: 5),
 
-                          return ForecastCards(
-                            text: Text(DateFormat.j().format(time)),
-                            value: Text("${convertTemp(forecastVal)} °C"),
-                            icon: Image.network(
-                              "$fIcon.png",
-                              width: 40,
-                              height: 30,
-                              fit: BoxFit.cover,
-                            ),
-                            // icon: foreCast["weather"][0]["main"] == "Clouds" ||
-                            //         foreCast["weather"][0]["main"] == "Rain"
-                            //     ? const Icon(Icons.cloud)
-                            //     : const Icon(Icons.sunny),
-                          );
-                        }),
-                  ),
-                  const Verticalspace(value: 10),
-
-                  //additional infos
-                  const Text(
-                    "Additional Information",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        ForecastCards(
+                          text: Text(ftime(1)),
+                          value: Text("${convertTemp(fval(1))} °C"),
+                          iconImage: Image.network(
+                            ficon(1),
+                            width: 40,
+                            height: 25,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        ForecastCards(
+                          text: Text(ftime(2)),
+                          value: Text("${convertTemp(fval(2))} °C"),
+                          iconImage: Image.network(
+                            ficon(2),
+                            width: 40,
+                            height: 25,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        ForecastCards(
+                          text: Text(ftime(3)),
+                          value: Text("${convertTemp(fval(3))} °C"),
+                          iconImage: Image.network(
+                            ficon(3),
+                            width: 40,
+                            height: 25,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        ForecastCards(
+                          text: Text(ftime(4)),
+                          value: Text("${convertTemp(fval(4))} °C"),
+                          iconImage: Image.network(
+                            ficon(4),
+                            width: 40,
+                            height: 25,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        ForecastCards(
+                          text: Text(ftime(5)),
+                          value: Text("${convertTemp(fval(5))} °C"),
+                          iconImage: Image.network(
+                            ficon(5),
+                            width: 40,
+                            height: 25,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        ForecastCards(
+                          text: Text(ftime(6)),
+                          value: Text("${convertTemp(fval(6))} °C"),
+                          iconImage: Image.network(
+                            ficon(6),
+                            width: 40,
+                            height: 25,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
+
+                  // SizedBox(
+                  //   height: 100.0,
+                  //   child: ListView.builder(
+                  //     itemCount: 4,
+                  //     scrollDirection: Axis.horizontal,
+                  //     itemBuilder: (context, index) {
+                  //       final foreCast = data["list"][index + 1];
+                  //       final time = DateTime.parse(foreCast["dt_txt"]);
+                  //       final forecastVal = foreCast["main"]["temp"];
+                  //       final fIcon = Uri.parse(
+                  //           "https://openweathermap.org/img/w/${foreCast["weather"][0]["icon"]}");
+                  //
+                  //       return ForecastCards(
+                  //         text: Text(DateFormat.j().format(time)),
+                  //         value: Text("${convertTemp(forecastVal)} °C"),
+                  //         icon: Image.network(
+                  //           "$fIcon.png",
+                  //           width: 40,
+                  //           height: 25,
+                  //           fit: BoxFit.cover,
+                  //         ),
+                  //       );
+                  //     },
+                  //   ),
+                  // ),
+
                   const Verticalspace(value: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -248,6 +334,7 @@ class _HomeState extends State<Home> {
                           icon: const Icon(Icons.wind_power_outlined),
                           text: const Text(
                             "Wind Speed",
+                            textAlign: TextAlign.center,
                             style: TextStyle(fontSize: 10),
                           ),
                           value: Text(windSpeed.toString()),

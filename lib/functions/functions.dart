@@ -3,9 +3,9 @@ import 'package:http/http.dart' as http;
 import 'package:wecast/utilities/utility.dart';
 
 //variables
-String cityName = "Nigeria";
+ //String cityName = "Poland";
 //fn to call weather api
-Future<Map<String, dynamic>> getWeather() async {
+Future<Map<String, dynamic>> getWeather(String cityName) async {
   try {
     var response = await http.get(
       Uri.parse(
