@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:wecast/utilities/utility.dart';
 
-//variables
- //String cityName = "Poland";
+
 //fn to call weather api
 Future<Map<String, dynamic>> getWeather(String cityName) async {
+
   try {
     var response = await http.get(
       Uri.parse(
@@ -22,10 +22,11 @@ Future<Map<String, dynamic>> getWeather(String cityName) async {
   } catch (e) {
     throw e.toString();
   }
+
 }
 
 //fn to conovert Kelvin to Celcuis
-String convertTemp(double value) {
+String convertTemp(num value) {
   double cent = value - 273.15;
   return cent.toStringAsFixed(0);
 }

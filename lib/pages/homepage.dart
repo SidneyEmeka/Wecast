@@ -24,79 +24,47 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    //Reusables
     double w = MediaQuery.of(context).size.width;
-    var border = const OutlineInputBorder(
-      borderSide: BorderSide(
-        color: Colors.black38,
-        width: 2.0,
-        style: BorderStyle.none,
-      ),
-      borderRadius: BorderRadius.all(
-        Radius.circular(10),
-      ),
-    );
 
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 50,
         backgroundColor: const Color.fromARGB(255, 76, 0, 51),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        // leading: const Icon(
-        //   Icons.cloudy_snowing,
-        //   color: Colors.white,
-        //   size: 15,
-        // ),
-        title: const Text(
-          "WECAST",
-          style: TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 12,
+        leading: GestureDetector(
+          onTap: () {
+            setState(() {
+              theWeather = getWeather("Nigeria");
+            });
+          },
+          child: const Icon(
+            Icons.cloudy_snowing,
             color: Colors.white,
+            size: 15,
           ),
         ),
-        // centerTitle:true,
-        // actions: [
-        //   Container(
-        //     width: 150,
-        //     height: 30,
-        //     decoration: BoxDecoration(
-        //       borderRadius: BorderRadius.circular(10),
-        //       color: Colors.transparent,
-        //       border: Border.all(
-        //         color: Colors.white,
-        //       ),
-        //     ),
-        //     child: TextField(
-        //       cursorColor: Colors.white,
-        //       controller: citySearchController,
-        //       style: const TextStyle(
-        //         color: Color.fromARGB(255, 76, 0, 51),
-        //       ),
-        //       decoration: InputDecoration(
-        //         hintStyle: const TextStyle(
-        //           color: Color.fromARGB(255, 76, 0, 51),
-        //           fontSize: 10,
-        //         ),
-        //         hintText: "Search City",
-        //         focusedBorder: border,
-        //         enabledBorder: border,
-        //         filled: true,
-        //         fillColor: Colors.white,
-        //       ),
-        //       keyboardType: TextInputType.text,
-        //     ),
-        //   ),
-        //   IconButton(
-        //     onPressed: () {
-        //       setState(() {
-        //         cityName = citySearchController.text;
-        //       });
-        //     },
-        //     icon: const Icon(Icons.cloud_sync),
-        //     color: Colors.white,
-        //     iconSize: 20,
-        //   ),
-        // ],
+        actions: [
+          Container(
+            padding: EdgeInsets.only(right: 15),
+            child: GestureDetector(
+              onTap: (){
+                setState(() {
+                  theWeather = getWeather("Nigeria");
+                });
+              },
+              child: Text(
+                "WECAST",
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 10,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ],
+
+        //centerTitle:true,
       ),
       body: FutureBuilder(
         future: theWeather,
@@ -129,10 +97,10 @@ class _HomeState extends State<Home> {
 
           String ftime(int index) {
             final time = DateTime.parse(data["list"][index]["dt_txt"]);
-            return DateFormat.j().format(time);
+            return DateFormat.jm().format(time);
           }
 
-          double fval(int index) {
+          num fval(int index) {
             return data["list"][index]["main"]["temp"];
           }
 
@@ -142,28 +110,70 @@ class _HomeState extends State<Home> {
             return fIcon;
           }
 
+          String fdescribe(int index) {
+            return data["list"][index]["weather"][0]["main"];
+          }
+
           return Padding(
             padding: const EdgeInsets.all(16.0),
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  TextField(
-                    enableSuggestions: true,
-                    keyboardType: TextInputType.text,
-                    textCapitalization: TextCapitalization.characters,
-                    controller: citySearchController,
-                    decoration: InputDecoration(
-                        hintText: "City",
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              //cityName = citySearchController.text;
-                              theWeather =
-                                  getWeather(citySearchController.text);
-                            });
-                          },
-                          icon: Icon(Icons.send_rounded),
-                        )),
+                  Verticalspace(value: 40),
+                  Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border:
+                            Border.all(color: Color.fromARGB(255, 76, 0, 51))),
+                    padding: EdgeInsets.only(left: 15, bottom: 4),
+                    width: w / 2,
+                    height: 30,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 3,
+                          child: TextField(
+                            style: TextStyle(
+                              fontSize: 10,
+                            ),
+                            enableSuggestions: true,
+                            keyboardType: TextInputType.text,
+                            textCapitalization: TextCapitalization.characters,
+                            controller: citySearchController,
+                            decoration: InputDecoration(
+                              disabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.transparent)),
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.transparent)),
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.transparent)),
+                              hintText: "Enter City",
+                              hintStyle: TextStyle(fontSize: 10),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                            flex: 1,
+                            child: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  theWeather = getWeather(
+                                      citySearchController.text.isEmpty
+                                          ? "Nigeria"
+                                          : citySearchController.text);
+                                });
+                              },
+                              icon: Icon(
+                                Icons.send_sharp,
+                                size: 15,
+                                color: Color.fromARGB(255, 76, 0, 51),
+                              ),
+                            ))
+                      ],
+                    ),
                   ),
                   //main card
                   Container(
@@ -176,12 +186,15 @@ class _HomeState extends State<Home> {
                       child: Column(
                         children: [
                           const Verticalspace(value: 25),
-                          Text(citySearchController.text == ""
-                              ? "NIGERIA"
-                              : citySearchController.text.toUpperCase()),
+                          Text(
+                              "${data["city"]["name"].toString().toUpperCase()} - ${data["city"]["country"]}",
+                          style: TextStyle(
+                          color: Color.fromARGB(255, 76, 0, 51)
+                          ),),
                           Text(
                             "${convertTemp(currentTemp)}°C",
                             style: const TextStyle(
+                              color: Color.fromARGB(255, 76, 0, 51),
                               fontSize: 30,
                               fontWeight: FontWeight.w500,
                             ),
@@ -198,6 +211,7 @@ class _HomeState extends State<Home> {
                             textAlign: TextAlign.center,
                             "$currentSky - $currentDescription",
                             style: const TextStyle(
+                              color: Color.fromARGB(255, 76, 0, 51),
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
                             ),
@@ -215,6 +229,7 @@ class _HomeState extends State<Home> {
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w500,
+                        color: Color.fromARGB(255, 76, 0, 51)
                     ),
                   ),
                   const Verticalspace(value: 5),
@@ -224,94 +239,79 @@ class _HomeState extends State<Home> {
                     child: Row(
                       children: [
                         ForecastCards(
-                          text: Text(ftime(1)),
-                          value: Text("${convertTemp(fval(1))} °C"),
+                          time: ftime(1),
+                          temp: "${convertTemp(fval(1))}°C",
                           iconImage: Image.network(
                             ficon(1),
                             width: 40,
                             height: 25,
                             fit: BoxFit.cover,
                           ),
+                          describe: fdescribe(1),
                         ),
+                        Horizontalspace(value: 5),
                         ForecastCards(
-                          text: Text(ftime(2)),
-                          value: Text("${convertTemp(fval(2))} °C"),
+                          time: ftime(2),
+                          temp: "${convertTemp(fval(2))}°C",
                           iconImage: Image.network(
                             ficon(2),
                             width: 40,
                             height: 25,
                             fit: BoxFit.cover,
                           ),
+                          describe: fdescribe(2),
                         ),
+                        Horizontalspace(value: 5),
                         ForecastCards(
-                          text: Text(ftime(3)),
-                          value: Text("${convertTemp(fval(3))} °C"),
+                          time: ftime(3),
+                          temp: "${convertTemp(fval(3))}°C",
                           iconImage: Image.network(
                             ficon(3),
                             width: 40,
                             height: 25,
                             fit: BoxFit.cover,
                           ),
+                          describe: fdescribe(3),
                         ),
+                        Horizontalspace(value: 5),
                         ForecastCards(
-                          text: Text(ftime(4)),
-                          value: Text("${convertTemp(fval(4))} °C"),
+                          time: ftime(4),
+                          temp: "${convertTemp(fval(4))}°C",
                           iconImage: Image.network(
                             ficon(4),
                             width: 40,
                             height: 25,
                             fit: BoxFit.cover,
                           ),
+                          describe: fdescribe(4),
                         ),
+                        Horizontalspace(value: 5),
                         ForecastCards(
-                          text: Text(ftime(5)),
-                          value: Text("${convertTemp(fval(5))} °C"),
+                          time: ftime(5),
+                          temp: "${convertTemp(fval(5))}°C",
                           iconImage: Image.network(
                             ficon(5),
                             width: 40,
                             height: 25,
                             fit: BoxFit.cover,
                           ),
+                          describe: fdescribe(5),
                         ),
+                        Horizontalspace(value: 5),
                         ForecastCards(
-                          text: Text(ftime(6)),
-                          value: Text("${convertTemp(fval(6))} °C"),
+                          time: ftime(6),
+                          temp: "${convertTemp(fval(6))}°C",
                           iconImage: Image.network(
                             ficon(6),
                             width: 40,
                             height: 25,
                             fit: BoxFit.cover,
                           ),
+                          describe: fdescribe(6),
                         ),
                       ],
                     ),
                   ),
-
-                  // SizedBox(
-                  //   height: 100.0,
-                  //   child: ListView.builder(
-                  //     itemCount: 4,
-                  //     scrollDirection: Axis.horizontal,
-                  //     itemBuilder: (context, index) {
-                  //       final foreCast = data["list"][index + 1];
-                  //       final time = DateTime.parse(foreCast["dt_txt"]);
-                  //       final forecastVal = foreCast["main"]["temp"];
-                  //       final fIcon = Uri.parse(
-                  //           "https://openweathermap.org/img/w/${foreCast["weather"][0]["icon"]}");
-                  //
-                  //       return ForecastCards(
-                  //         text: Text(DateFormat.j().format(time)),
-                  //         value: Text("${convertTemp(forecastVal)} °C"),
-                  //         icon: Image.network(
-                  //           "$fIcon.png",
-                  //           width: 40,
-                  //           height: 25,
-                  //           fit: BoxFit.cover,
-                  //         ),
-                  //       );
-                  //     },
-                  //   ),
-                  // ),
 
                   const Verticalspace(value: 10),
                   Row(
@@ -320,35 +320,57 @@ class _HomeState extends State<Home> {
                       Expanded(
                         flex: 1,
                         child: InfoCards(
-                          icon: const Icon(Icons.water_drop),
+                          icon: const Icon(
+                            Icons.water_drop,
+                            color: Color.fromARGB(255, 76, 0, 51),
+                          ),
                           text: const Text(
                             "Humidity",
-                            style: TextStyle(fontSize: 10),
+                            style: TextStyle(fontSize: 10, fontWeight: FontWeight.w500,
+                                color: Color.fromARGB(255, 76, 0, 51)),
                           ),
-                          value: Text(humidity.toString()),
+                          value: Text(
+                            humidity.toString(),
+                            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500,
+                                color: Color.fromARGB(255, 76, 0, 51)),
+                          ),
                         ),
                       ),
                       Expanded(
                         flex: 1,
                         child: InfoCards(
-                          icon: const Icon(Icons.wind_power_outlined),
+                          icon: const Icon(Icons.wind_power_outlined,
+                              color: Color.fromARGB(255, 76, 0, 51)),
                           text: const Text(
                             "Wind Speed",
                             textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 10),
+                            style: TextStyle(fontSize: 10, fontWeight: FontWeight.w500,
+                                color: Color.fromARGB(255, 76, 0, 51)),
                           ),
-                          value: Text(windSpeed.toString()),
+                          value: Text(
+                            windSpeed.toString(),
+                            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500,
+                                color: Color.fromARGB(255, 76, 0, 51)),
+                          ),
                         ),
                       ),
                       Expanded(
                         flex: 1,
                         child: InfoCards(
-                          icon: const Icon(Icons.beach_access),
+                          icon: const Icon(Icons.beach_access,
+                              color: Color.fromARGB(255, 76, 0, 51)),
                           text: const Text(
                             "Pressure",
-                            style: TextStyle(fontSize: 10),
+                            style: TextStyle(fontSize: 10,fontWeight: FontWeight.w500,
+                                color: Color.fromARGB(255, 76, 0, 51)),
                           ),
-                          value: Text(pressure.toString()),
+                          value: Text(
+                            pressure.toString(),
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 12,
+                                color: Color.fromARGB(255, 76, 0, 51)),
+                          ),
                         ),
                       ),
                     ],
