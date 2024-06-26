@@ -14,8 +14,9 @@ class ForecastCards extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 6,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 4),
+      child: Container(
+        width: 110,
+       padding: const EdgeInsets.symmetric(vertical: 4),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -31,7 +32,7 @@ class ForecastCards extends StatelessWidget {
               fontWeight: FontWeight.w500
             ),),
             iconImage,
-            const Verticalspace(value: 10),
+            const Verticalspace(value: 8),
             Text(describe, style: TextStyle(
                 fontSize: 10,
                 color: Color.fromARGB(255, 76, 0, 51),
