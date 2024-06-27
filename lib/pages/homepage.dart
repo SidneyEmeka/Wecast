@@ -449,8 +449,9 @@ class _HomeState extends State<Home> {
                       children: [
                         Text(
                           "${data["city"]["name"].toString().toUpperCase()} - ${data["city"]["country"]}",
-                          style:
-                              TextStyle(color: Color.fromARGB(255, 76, 0, 51)),
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 76, 0, 51),
+                              fontWeight: FontWeight.bold),
                         ),
                         const Verticalspace(value: 10),
                         SingleChildScrollView(
@@ -470,52 +471,52 @@ class _HomeState extends State<Home> {
                                 ),
                                 describe: fdescribe(7),
                               ),
-                              //Horizontalspace(value: 5),
+                              Verticalspace(value: 10),
                               ForecastdaysCards(
-                                day: fdday(12),
-                                temp: "${convertTemp(fval(12))}°C",
-                                time: fdtime(12),
+                                day: fdday(15),
+                                temp: "${convertTemp(fval(15))}°C",
+                                time: fdtime(15),
                                 iconImage: Image.network(
-                                  ficon(12),
+                                  ficon(15),
                                   width: 80,
                                   height: 50,
                                   fit: BoxFit.cover,
                                 ),
-                                describe: fdescribe(12),
+                                describe: fdescribe(15),
                               ),
-
+                              Verticalspace(value: 10),
                               ForecastdaysCards(
-                                day: fdday(17),
-                                temp: "${convertTemp(fval(17))}°C",
-                                time: fdtime(17),
+                                day: fdday(23),
+                                temp: "${convertTemp(fval(23))}°C",
+                                time: fdtime(23),
                                 iconImage: Image.network(
-                                  ficon(17),
+                                  ficon(23),
                                   width: 80,
                                   height: 50,
                                   fit: BoxFit.cover,
                                 ),
-                                describe: fdescribe(17),
+                                describe: fdescribe(23),
                               ),
-                              // Horizontalspace(value: 5),
+                              Verticalspace(value: 10),
                               ForecastdaysCards(
-                                day: fdday(28),
-                                temp: "${convertTemp(fval(28))}°C",
-                                time: fdtime(28),
+                                day: fdday(31),
+                                temp: "${convertTemp(fval(31))}°C",
+                                time: fdtime(31),
                                 iconImage: Image.network(
-                                  ficon(28),
+                                  ficon(31),
                                   width: 80,
                                   height: 50,
                                   fit: BoxFit.cover,
                                 ),
-                                describe: fdescribe(28),
+                                describe: fdescribe(31),
                               ),
-
+                              Verticalspace(value: 10),
                               ForecastdaysCards(
-                                day: fdday(36),
-                                temp: "${convertTemp(fval(36))}°C",
-                                time: fdtime(36),
+                                day: fdday(39),
+                                temp: "${convertTemp(fval(39))}°C",
+                                time: fdtime(39),
                                 iconImage: Image.network(
-                                  ficon(36),
+                                  ficon(39),
                                   width: 80,
                                   height: 50,
                                   fit: BoxFit.cover,

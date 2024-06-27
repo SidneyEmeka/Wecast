@@ -22,7 +22,7 @@ class ForecastdaysCards extends StatelessWidget {
       elevation: 6,
       child: Container(
           width: MediaQuery.of(context).size.width,
-          padding: const EdgeInsets.symmetric(vertical: 4),
+          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
           child: Row(
             children: [
               Expanded(
@@ -32,7 +32,7 @@ class ForecastdaysCards extends StatelessWidget {
                       Text(
                         day,
                         style: TextStyle(
-                            fontSize: 11,
+                            fontSize: 15,
                             color: Color.fromARGB(255, 76, 0, 51),
                             fontWeight: FontWeight.w500),
                       ),
@@ -47,14 +47,14 @@ class ForecastdaysCards extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 11,
                             color: Color.fromARGB(255, 76, 0, 51),
-                            fontWeight: FontWeight.w500),
+                            fontWeight: FontWeight.bold),
                       ),
                       iconImage,
                       const Verticalspace(value: 8),
                       Text(
                         describe,
                         style: TextStyle(
-                            fontSize: 10,
+                            fontSize: 15,
                             color: Color.fromARGB(255, 76, 0, 51),
                             fontWeight: FontWeight.w500),
                       ),
@@ -67,7 +67,7 @@ class ForecastdaysCards extends StatelessWidget {
                       Text(
                         temp,
                         style: TextStyle(
-                            fontSize: 10,
+                            fontSize: 15,
                             color: Color.fromARGB(255, 76, 0, 51),
                             fontWeight: FontWeight.w500),
                       ),
@@ -78,26 +78,3 @@ class ForecastdaysCards extends StatelessWidget {
     );
   }
 }
-// Column(
-// mainAxisAlignment: MainAxisAlignment.center,
-// children: [
-// Text(time, style: TextStyle(
-// fontSize: 11,
-// color: Color.fromARGB(255, 76, 0, 51),
-// fontWeight: FontWeight.w500
-// ),),
-// const Verticalspace(value: 8),
-// Text(temp, style: TextStyle(
-// fontSize: 10,
-// color: Color.fromARGB(255, 76, 0, 51),
-// fontWeight: FontWeight.w500
-// ),),
-// iconImage,
-// const Verticalspace(value: 8),
-// Text(describe, style: TextStyle(
-// fontSize: 10,
-// color: Color.fromARGB(255, 76, 0, 51),
-// fontWeight: FontWeight.w500
-// ),),
-// ],
-// ),
