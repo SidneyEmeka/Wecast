@@ -37,7 +37,11 @@ class _HomeState extends State<Home> {
           toolbarHeight: 15,
           backgroundColor: const Color.fromARGB(255, 76, 0, 51),
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(10),
+                    bottomLeft: Radius.circular(10),
+                  )),
           bottom: myTabs(),
         ),
         body: TabBarView(
@@ -53,19 +57,17 @@ class _HomeState extends State<Home> {
                   return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Errorpage(
-                          selectedCity: '${citySearchController.text}',
-                        ),
+                        Errorpage(),
                         GestureDetector(
                           onTap: () {
                             setState(() {
-                             theWeather = getWeather("Nigeria");
+                              theWeather = getWeather("Nigeria");
                             });
                           },
                           child: Container(
                             alignment: Alignment.center,
                             width: MediaQuery.of(context).size.width / 4,
-                            padding: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(8),
                             margin: EdgeInsets.only(top: 5),
                             decoration: BoxDecoration(
                               color: Color.fromARGB(255, 76, 0, 51),
@@ -73,7 +75,8 @@ class _HomeState extends State<Home> {
                             ),
                             child: Text(
                               "Try Again",
-                              style: TextStyle(color: Colors.white),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 10),
                             ),
                           ),
                         )
@@ -421,33 +424,32 @@ class _HomeState extends State<Home> {
                 }
                 if (snapshot.hasError) {
                   return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Errorpage(
-                          selectedCity: '${citySearchController.text}',
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              theWeather = getWeather("Nigeria");
-                            });
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            width: MediaQuery.of(context).size.width / 4,
-                            padding: EdgeInsets.all(10),
-                            margin: EdgeInsets.only(top: 5),
-                            decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 76, 0, 51),
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Text(
-                              "Try Again",
-                              style: TextStyle(color: Colors.white),
-                            ),
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Errorpage(),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            theWeather = getWeather("Nigeria");
+                          });
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          width: MediaQuery.of(context).size.width / 4,
+                          padding: EdgeInsets.all(8),
+                          margin: EdgeInsets.only(top: 5),
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 76, 0, 51),
+                            borderRadius: BorderRadius.circular(15),
                           ),
-                        )
-                      ]);
+                          child: Text(
+                            "Try Again",
+                            style: TextStyle(color: Colors.white, fontSize: 10),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
                 }
 
                 final data = snapshot.data!;
@@ -477,7 +479,7 @@ class _HomeState extends State<Home> {
 
                 return Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 35),
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
                   child: SingleChildScrollView(
                     child: Column(
                       children: [

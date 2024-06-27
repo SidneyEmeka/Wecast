@@ -2,10 +2,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:wecast/utilities/utility.dart';
 
-
 //fn to call weather api
 Future<Map<String, dynamic>> getWeather(String cityName) async {
-
   try {
     var response = await http.get(
       Uri.parse(
@@ -22,7 +20,6 @@ Future<Map<String, dynamic>> getWeather(String cityName) async {
   } catch (e) {
     throw e.toString();
   }
-
 }
 
 //fn to conovert Kelvin to Celcuis

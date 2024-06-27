@@ -54,9 +54,9 @@ class ForecastdaysCards extends StatelessWidget {
                       Text(
                         describe,
                         style: TextStyle(
-                            fontSize: 15,
+                            fontSize: 11,
                             color: Color.fromARGB(255, 76, 0, 51),
-                            fontWeight: FontWeight.w500),
+                            fontWeight: FontWeight.bold),
                       ),
                     ],
                   )),
