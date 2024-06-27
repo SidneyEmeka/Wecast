@@ -10,9 +10,8 @@ Wecast is built on flutter using dart.
 	<tr>
 			<th>Day forecast Page</th>	
 			<th>5-days forecast Page</th>
-		<th>Loading page</th>
-		<th>Error Page</th>
-		<th>Loading</th>
+		<th>Error page</th>
+		<th>Loading Page</th>
 		</tr>
 		<tr>
 			<td>
