@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import '../functions/functions.dart';
 import '../widgets/forecast_cards.dart';
 import '../widgets/info_cards.dart';
 import '../widgets/spacing.dart';
 import '../widgets/tabbar.dart';
+import 'errorpage.dart';
 import 'forecastdays.dart';
 
 class Home extends StatefulWidget {
@@ -48,14 +50,34 @@ class _HomeState extends State<Home> {
                       child: CircularProgressIndicator.adaptive());
                 }
                 if (snapshot.hasError) {
-                  return const Center(
-                    child: Text(
-                      "Unable to Connect",
-                      style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: Color.fromARGB(255, 76, 0, 51)),
-                    ),
-                  );
+                  return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Errorpage(
+                          selectedCity: '${citySearchController.text}',
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                             theWeather = getWeather("Nigeria");
+                            });
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            width: MediaQuery.of(context).size.width / 4,
+                            padding: EdgeInsets.all(10),
+                            margin: EdgeInsets.only(top: 5),
+                            decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 76, 0, 51),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Text(
+                              "Try Again",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        )
+                      ]);
                 }
 
                 final data = snapshot.data!;
@@ -95,7 +117,6 @@ class _HomeState extends State<Home> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        //Verticalspace(value: 20),
                         Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
@@ -111,6 +132,10 @@ class _HomeState extends State<Home> {
                               Expanded(
                                 flex: 3,
                                 child: TextField(
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp('[a-zA-z]'))
+                                  ],
                                   style: TextStyle(
                                     fontSize: 10,
                                   ),
@@ -395,28 +420,37 @@ class _HomeState extends State<Home> {
                       child: CircularProgressIndicator.adaptive());
                 }
                 if (snapshot.hasError) {
-                  return const Center(
-                    child: Text(
-                      "Unable to Connect",
-                      style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: Color.fromARGB(255, 76, 0, 51)),
-                    ),
-                  );
+                  return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Errorpage(
+                          selectedCity: '${citySearchController.text}',
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              theWeather = getWeather("Nigeria");
+                            });
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            width: MediaQuery.of(context).size.width / 4,
+                            padding: EdgeInsets.all(10),
+                            margin: EdgeInsets.only(top: 5),
+                            decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 76, 0, 51),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Text(
+                              "Try Again",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        )
+                      ]);
                 }
 
                 final data = snapshot.data!;
-                // final currentWetData = data["list"][0];
-                // final currentTemp = currentWetData["main"]["temp"];
-                // final currentSky = currentWetData["weather"][0]["main"];
-                // final currentDescription =
-                //     currentWetData["weather"][0]["description"];
-                // final pressure = currentWetData["main"]["pressure"];
-                // final windSpeed = currentWetData["wind"]["speed"];
-                // final humidity = currentWetData["main"]["humidity"];
-                // final wIcon = Uri.parse(
-                //     "https://openweathermap.org/img/w/${currentWetData["weather"][0]["icon"]}");
-
                 String fdday(int index) {
                   final day = DateTime.parse(data["list"][index]["dt_txt"]);
                   return DateFormat('EEE d').format(day);
