@@ -1,9 +1,26 @@
 # wecast
 Wecast is a weather forecast app that tells a user the weather condition of any part of the world <br>
 Wecast also gives its users predictions on when to use an umbrella or not<br>
-Wecast is built on flutter using dart.
+Wecast is built on flutter.
 
 ## Mobile App
+<table align="center">
+	<tbody width="100%">
+	<tr>
+			<th>Onboard</th>	
+		</tr>
+		<tr>
+			<td>
+			<img src="https://github.com/SidneyEmeka/Wecast/blob/master/assets/images/Onboard.png" alt="Onboard"></img>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				🔗 <a href="https://twitter.com/siswipe">Tweet</a>
+			</td>
+		</tr>
+	</tbody>
+</table>
 
 <table>
 	<tbody width="100%">
