@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wecast/pages/homepage.dart';
+import 'package:wecast/pages/onboard.dart';
 
 void main() {
   runApp(const Wecast());
@@ -19,7 +20,7 @@ class Wecast extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: const Home(),
+      home: const Onboard(),
     );
   }
 }
