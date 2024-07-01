@@ -7,7 +7,7 @@ Wecast is built on flutter.
 <table align="center">
 	<tbody width="100%">
 	<tr>
-			<th>Onboard</th>	
+			<th>Onboard Page</th>	
 		</tr>
 		<tr>
 			<td>
