@@ -1,57 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:wecast/pages/homepage.dart';
 
-class Onboard extends StatelessWidget {
+import 'homepage.dart';
+
+
+class Onboard extends StatefulWidget {
   const Onboard({super.key});
+
+  @override
+  State<Onboard> createState() => _OnboardState();
+}
+
+class _OnboardState extends State<Onboard> {
+  @override
+  void initState() {
+    delayPage();
+    super.initState();
+  }
+
+  delayPage() async {
+    await Future.delayed(const Duration(seconds: 2), () {
+      Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const Home(),
+                  ),);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 76, 0, 51),
       body: Center(
-          child: Column(
+    child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Icon(
             Icons.cloudy_snowing,
             color: Colors.white,
-            size: 150,
+            size: 180,
           ),
-          SizedBox(
-            height: 100,
-          ),
-          GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const Home(),
-                  ),
-                );
-              },
-              child: Container(
-
-                alignment: Alignment.center,
-                padding: EdgeInsets.symmetric(
-                  vertical: 10,
-                  horizontal: 20
-                ),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                  border: Border.all(
-                    color: Colors.white
-                  ),
-                  borderRadius: BorderRadius.circular(15)
-                ),
-                width: MediaQuery.of(context).size.width/4,
-                child: Text("Continue",
-                style: TextStyle(
-                  color: Color.fromARGB(255, 76, 0, 51),
-                  fontSize: 10
-                ),),
-              ))
         ],
-      )),
+      )
+       ),
     );
   }
 }
