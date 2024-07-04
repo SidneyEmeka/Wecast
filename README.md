@@ -7,11 +7,11 @@ Wecast is built on flutter.
 <table align="center">
 	<tbody width="100%">
 	<tr>
-			<th>Onboard Page</th>	
+			<th>Preview</th>	
 		</tr>
 		<tr>
 			<td>
-			<img src="https://github.com/SidneyEmeka/Wecast/blob/master/assets/images/Onboard.png" alt="Onboard"></img>
+			<img src="https://github.com/SidneyEmeka/Wecast/blob/master/assets/images/snip.gif" alt="Snippet"></img>
 			</td>
 		</tr>
 		<tr>
