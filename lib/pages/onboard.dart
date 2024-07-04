@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'homepage.dart';
 
-
 class Onboard extends StatefulWidget {
   const Onboard({super.key});
 
@@ -20,9 +19,10 @@ class _OnboardState extends State<Onboard> {
   delayPage() async {
     await Future.delayed(const Duration(seconds: 2), () {
       Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const Home(),
-                  ),);
+        MaterialPageRoute(
+          builder: (context) => const Home(),
+        ),
+      );
     });
   }
 
@@ -31,7 +31,7 @@ class _OnboardState extends State<Onboard> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 76, 0, 51),
       body: Center(
-    child: Column(
+          child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -41,8 +41,7 @@ class _OnboardState extends State<Onboard> {
             size: 180,
           ),
         ],
-      )
-       ),
+      )),
     );
   }
 }
