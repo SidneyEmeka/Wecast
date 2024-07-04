@@ -25,7 +25,7 @@ Wecast is built on flutter.
 <table>
 	<tbody width="100%">
 	<tr>
-			<th>Day forecast Page</th>	
+			<th>Daily forecast Page</th>	
 			<th>5-days forecast Page</th>
 		</tr>
 		<tr>
