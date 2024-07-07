@@ -11,7 +11,7 @@ Wecast is built on flutter.
 		</tr>
 		<tr>
 			<td>
-			<img src="https://github.com/SidneyEmeka/Wecast/blob/master/assets/images/snippet.gif" alt="Snippet"></img>
+			<img src="https://github.com/SidneyEmeka/myfiles/blob/master/wecast/snippet.gif" alt="Snippet"></img>
 			</td>
 		</tr>
 		<tr>
@@ -30,10 +30,10 @@ Wecast is built on flutter.
 		</tr>
 		<tr>
 			<td>
-			<img src="https://github.com/SidneyEmeka/Wecast/blob/master/assets/images/today.jpg" alt="Home"></img>
+			<img src="https://github.com/SidneyEmeka/myfiles/blob/master/wecast/today.jpg" alt="Home"></img>
 			</td>
 			<td>
-			<img src="https://github.com/SidneyEmeka/Wecast/blob/master/assets/images/5days.jpg" alt="5-days"></img>
+			<img src="https://github.com/SidneyEmeka/myfiles/blob/master/wecast/5days.jpg" alt="5-days"></img>
 			</td>
 		</tr>
 		<tr>
@@ -55,10 +55,10 @@ Wecast is built on flutter.
 		</tr>
 		<tr>
 	<td>
-			<img src="https://github.com/SidneyEmeka/Wecast/blob/master/assets/images/error.jpg" alt="Error"></img>
+			<img src="https://github.com/SidneyEmeka/myfiles/blob/master/wecast/error.jpg" alt="Error"></img>
 			</td>
 	<td>
-			<img src="https://github.com/SidneyEmeka/Wecast/blob/master/assets/images/loading.jpg" alt="Search"></img>
+			<img src="https://github.com/SidneyEmeka/myfiles/blob/master/wecast/loading.jpg" alt="Search"></img>
 			</td>
 		</tr>
 		<tr>
