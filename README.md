@@ -16,7 +16,7 @@ Wecast is built on flutter.
 		</tr>
 		<tr>
 			<td>
-				🔗 <a href="https://twitter.com/siswipe">Tweet</a>
+				🔗 <a href="https://x.com/sidswipe/status/1809690837770551528?s=46">Tweet</a>
 			</td>
 		</tr>
 	</tbody>
@@ -38,10 +38,10 @@ Wecast is built on flutter.
 		</tr>
 		<tr>
 			<td>
-				🔗 <a href="https://twitter.com/siswipe">Tweet</a>
+				🔗 <a href="https://x.com/sidswipe/status/1809690837770551528?s=46">Tweet</a>
 			</td>
 			<td>
-				🔗 <a href="https://x.com/sidswipe">Tweet</a>
+				🔗 <a href="https://x.com/sidswipe/status/1809690837770551528?s=46">Tweet</a>
 			</td>
 		</tr>
 	</tbody>
@@ -63,10 +63,10 @@ Wecast is built on flutter.
 		</tr>
 		<tr>
 			<td>
-				🔗 <a href="https://twitter.com/siswipe">Tweet</a>
+				🔗 <a href="https://x.com/sidswipe/status/1809690837770551528?s=46">Tweet</a>
 			</td>
 			<td>
-				🔗 <a href="https://twitter.com/siswipe">Tweet</a>
+				🔗 <a href="https://x.com/sidswipe/status/1809690837770551528?s=46">Tweet</a>
 			</td>
 		</tr>
 	</tbody>
