@@ -15,8 +15,8 @@ class ForecastCards extends StatelessWidget {
     return Card(
       elevation: 6,
       child: Container(
-        width: 110,
-       padding: const EdgeInsets.symmetric(vertical: 4),
+        width: MediaQuery.of(context).size.width*0.27,
+       padding: const EdgeInsets.symmetric(vertical: 10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

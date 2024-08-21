@@ -22,7 +22,7 @@ class ForecastdaysCards extends StatelessWidget {
       elevation: 6,
       child: Container(
           width: MediaQuery.of(context).size.width,
-          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
           child: Row(
             children: [
               Expanded(
@@ -45,7 +45,7 @@ class ForecastdaysCards extends StatelessWidget {
                       Text(
                         time,
                         style: TextStyle(
-                            fontSize: 11,
+                            fontSize: 13,
                             color: Color.fromARGB(255, 76, 0, 51),
                             fontWeight: FontWeight.bold),
                       ),
@@ -54,7 +54,7 @@ class ForecastdaysCards extends StatelessWidget {
                       Text(
                         describe,
                         style: TextStyle(
-                            fontSize: 11,
+                            fontSize: 13,
                             color: Color.fromARGB(255, 76, 0, 51),
                             fontWeight: FontWeight.bold),
                       ),

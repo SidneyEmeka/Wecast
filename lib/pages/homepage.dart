@@ -29,6 +29,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
+    double h = MediaQuery.of(context).size.height;
 
     return DefaultTabController(
       length: 2,
@@ -121,6 +122,7 @@ class _HomeState extends State<Home> {
                     child: Column(
                       children: [
                         Container(
+                          margin:EdgeInsets.only(bottom: 20),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             border: Border.all(
@@ -186,7 +188,7 @@ class _HomeState extends State<Home> {
                         //main card
                         Container(
                           margin: const EdgeInsets.only(
-                            top: 10,
+                            top: 10, bottom: 20
                           ),
                           width: w,
                           child: Card(
@@ -235,7 +237,7 @@ class _HomeState extends State<Home> {
                           child: Container(
                               alignment: Alignment.center,
                               width: w - 40,
-                              padding: EdgeInsets.symmetric(vertical: 10),
+                              padding: EdgeInsets.symmetric(vertical: 15),
                               child: Text(
                                 currentSky == 'Rain' || currentSky == 'Clouds'
                                     ? "RECOMMENDATION - FOR NOW, USE AN UMBRELLA"
@@ -244,7 +246,7 @@ class _HomeState extends State<Home> {
                                     TextStyle(fontSize: 9, color: Colors.white),
                               )),
                         ),
-                        const Verticalspace(value: 15),
+                        const Verticalspace(value: 30),
 
                         //forecast cards
                         const Text(
@@ -256,85 +258,99 @@ class _HomeState extends State<Home> {
                         ),
                         const Verticalspace(value: 10),
 
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: [
-                              ForecastCards(
-                                time: ftime(1),
-                                temp: "${convertTemp(fval(1))}°C",
-                                iconImage: Image.network(
-                                  ficon(1),
-                                  width: 40,
-                                  height: 25,
-                                  fit: BoxFit.cover,
-                                ),
-                                describe: fdescribe(1),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ForecastCards(
+                              time: ftime(1),
+                              temp: "${convertTemp(fval(1))}°C",
+                              iconImage: Image.network(
+                                ficon(1),
+                                width: 40,
+                                height: 25,
+                                fit: BoxFit.cover,
                               ),
-                              //Horizontalspace(value: 5),
-                              ForecastCards(
-                                time: ftime(2),
-                                temp: "${convertTemp(fval(2))}°C",
-                                iconImage: Image.network(
-                                  ficon(2),
-                                  width: 40,
-                                  height: 25,
-                                  fit: BoxFit.cover,
-                                ),
-                                describe: fdescribe(2),
+                              describe: fdescribe(1),
+                            ),
+                            //Horizontalspace(value: 5),
+                            ForecastCards(
+                              time: ftime(2),
+                              temp: "${convertTemp(fval(2))}°C",
+                              iconImage: Image.network(
+                                ficon(2),
+                                width: 40,
+                                height: 25,
+                                fit: BoxFit.cover,
                               ),
-                              // Horizontalspace(value: 5),
-                              ForecastCards(
-                                time: ftime(3),
-                                temp: "${convertTemp(fval(3))}°C",
-                                iconImage: Image.network(
-                                  ficon(3),
-                                  width: 40,
-                                  height: 25,
-                                  fit: BoxFit.cover,
-                                ),
-                                describe: fdescribe(3),
+                              describe: fdescribe(2),
+                            ),
+                            // Horizontalspace(value: 5),
+                            ForecastCards(
+                              time: ftime(3),
+                              temp: "${convertTemp(fval(3))}°C",
+                              iconImage: Image.network(
+                                ficon(3),
+                                width: 40,
+                                height: 25,
+                                fit: BoxFit.cover,
                               ),
-                              // Horizontalspace(value: 5),
-                              ForecastCards(
-                                time: ftime(4),
-                                temp: "${convertTemp(fval(4))}°C",
-                                iconImage: Image.network(
-                                  ficon(4),
-                                  width: 40,
-                                  height: 25,
-                                  fit: BoxFit.cover,
-                                ),
-                                describe: fdescribe(4),
-                              ),
-                              // Horizontalspace(value: 5),
-                              ForecastCards(
-                                time: ftime(5),
-                                temp: "${convertTemp(fval(5))}°C",
-                                iconImage: Image.network(
-                                  ficon(5),
-                                  width: 40,
-                                  height: 25,
-                                  fit: BoxFit.cover,
-                                ),
-                                describe: fdescribe(5),
-                              ),
-                              // Horizontalspace(value: 5),
-                              ForecastCards(
-                                time: ftime(6),
-                                temp: "${convertTemp(fval(6))}°C",
-                                iconImage: Image.network(
-                                  ficon(6),
-                                  width: 40,
-                                  height: 25,
-                                  fit: BoxFit.cover,
-                                ),
-                                describe: fdescribe(6),
-                              ),
-                            ],
-                          ),
-                        ),
+                              describe: fdescribe(3),
+                            ),
+                            // Horizontalspace(value: 5),
 
+                          ],
+                        ),
+                        const Verticalspace(value: 15),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ForecastCards(
+                              time: ftime(4),
+                              temp: "${convertTemp(fval(4))}°C",
+                              iconImage: Image.network(
+                                ficon(4),
+                                width: 40,
+                                height: 25,
+                                fit: BoxFit.cover,
+                              ),
+                              describe: fdescribe(4),
+                            ),
+                            // Horizontalspace(value: 5),
+                            ForecastCards(
+                              time: ftime(5),
+                              temp: "${convertTemp(fval(5))}°C",
+                              iconImage: Image.network(
+                                ficon(5),
+                                width: 40,
+                                height: 25,
+                                fit: BoxFit.cover,
+                              ),
+                              describe: fdescribe(5),
+                            ),
+                            // Horizontalspace(value: 5),
+                            ForecastCards(
+                              time: ftime(6),
+                              temp: "${convertTemp(fval(6))}°C",
+                              iconImage: Image.network(
+                                ficon(6),
+                                width: 40,
+                                height: 25,
+                                fit: BoxFit.cover,
+                              ),
+                              describe: fdescribe(6),
+                            ),
+                          ],
+                        ),
+                        const Verticalspace(value: 30),
+                        const Text(
+                          "Additional Information",
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: Color.fromARGB(255, 76, 0, 51)),
+                        ),
                         const Verticalspace(value: 10),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -489,7 +505,7 @@ class _HomeState extends State<Home> {
                               color: Color.fromARGB(255, 76, 0, 51),
                               fontWeight: FontWeight.bold),
                         ),
-                        const Verticalspace(value: 10),
+                        const Verticalspace(value: 20),
                         SingleChildScrollView(
                           scrollDirection: Axis.vertical,
                           child: Column(
@@ -507,7 +523,7 @@ class _HomeState extends State<Home> {
                                 ),
                                 describe: fdescribe(7),
                               ),
-                              Verticalspace(value: 10),
+                              Verticalspace(value: 20),
                               ForecastdaysCards(
                                 day: fdday(15),
                                 temp: "${convertTemp(fval(15))}°C",
@@ -520,7 +536,7 @@ class _HomeState extends State<Home> {
                                 ),
                                 describe: fdescribe(15),
                               ),
-                              Verticalspace(value: 10),
+                              Verticalspace(value: 20),
                               ForecastdaysCards(
                                 day: fdday(23),
                                 temp: "${convertTemp(fval(23))}°C",
@@ -533,7 +549,7 @@ class _HomeState extends State<Home> {
                                 ),
                                 describe: fdescribe(23),
                               ),
-                              Verticalspace(value: 10),
+                              Verticalspace(value: 20),
                               ForecastdaysCards(
                                 day: fdday(31),
                                 temp: "${convertTemp(fval(31))}°C",
@@ -546,7 +562,7 @@ class _HomeState extends State<Home> {
                                 ),
                                 describe: fdescribe(31),
                               ),
-                              Verticalspace(value: 10),
+                              Verticalspace(value: 20),
                               ForecastdaysCards(
                                 day: fdday(39),
                                 temp: "${convertTemp(fval(39))}°C",
