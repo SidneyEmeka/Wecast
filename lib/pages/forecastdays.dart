@@ -45,7 +45,7 @@ class ForecastdaysCards extends StatelessWidget {
                       Text(
                         time,
                         style: TextStyle(
-                            fontSize: 13,
+                            fontSize: 11,
                             color: Color.fromARGB(255, 76, 0, 51),
                             fontWeight: FontWeight.bold),
                       ),
@@ -54,7 +54,7 @@ class ForecastdaysCards extends StatelessWidget {
                       Text(
                         describe,
                         style: TextStyle(
-                            fontSize: 13,
+                            fontSize: 11,
                             color: Color.fromARGB(255, 76, 0, 51),
                             fontWeight: FontWeight.bold),
                       ),

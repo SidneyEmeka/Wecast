@@ -16,12 +16,12 @@ class ForecastCards extends StatelessWidget {
       elevation: 6,
       child: Container(
         width: MediaQuery.of(context).size.width*0.23,
-       padding: const EdgeInsets.symmetric(vertical: 10),
+       padding: const EdgeInsets.symmetric(vertical: 6),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(time, style: TextStyle(
-                fontSize: 11,
+                fontSize: 10,
                 color: Color.fromARGB(255, 76, 0, 51),
                 fontWeight: FontWeight.w500
             ),),
